@@ -1,0 +1,17 @@
+.idCard {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.idText {
+  text-align: left;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
