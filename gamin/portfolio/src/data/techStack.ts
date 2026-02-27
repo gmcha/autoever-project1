@@ -12,7 +12,7 @@ export const techData = [
       { name: "C", icon: "c", color: "A8B9CC" },
       { name: "C++", icon: "cplusplus", color: "00599C" },
       { name: "Dart", icon: "dart", color: "0175C2" },
-      { name: "Java", icon: "java", color: "007396" },
+      { name: "Java", icon: "openjdk", color: "007396" },
       { name: "JavaScript", icon: "javascript", color: "F7DF1E" },
       { name: "Kotlin", icon: "kotlin", color: "7F52FF" },
       { name: "Python", icon: "python", color: "3776AB" },
