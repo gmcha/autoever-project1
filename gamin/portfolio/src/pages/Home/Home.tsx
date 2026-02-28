@@ -1,4 +1,5 @@
 import About from "../../components/About/About";
+import Contacts from "../../components/Contacts/Contacts";
 import Experience from "../../components/Experience/Experience";
 import Footer from "../../components/Footer/Footer";
 import Skills from "../../components/Skills/Skills";
@@ -14,6 +15,7 @@ function Home() {
       <TopProjects />
       <TopBlogs />
       <Footer />
+      <Contacts />
     </div>
   );
 }
