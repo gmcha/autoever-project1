@@ -1,10 +1,10 @@
 import About from "../../components/About/About";
 import Contacts from "../../components/Contacts/Contacts";
 import Experience from "../../components/Experience/Experience";
+import FeaturedProjects from "../../components/FeaturedProjects/FeaturedProjects";
 import Footer from "../../components/Footer/Footer";
 import Skills from "../../components/Skills/Skills";
 import TopBlogs from "../../components/TopBlogs/TopBlogs";
-import TopProjects from "../../components/TopProjects/TopProjects";
 
 function Home() {
   return (
@@ -12,7 +12,7 @@ function Home() {
       <About />
       <Skills />
       <Experience />
-      <TopProjects />
+      <FeaturedProjects />
       <TopBlogs />
       <Footer />
       <Contacts />
