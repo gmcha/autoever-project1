@@ -8,6 +8,7 @@ import GuestBook from "./pages/GuestBook/GuestBook";
 import Blogs from "./pages/Blogs/Blogs";
 import BlogDetail from "./pages/BlogDetail/BlogDetail";
 import ProjectDetail from "./pages/ProjectDetail/ProjectDetail";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/blogs/:slug" element={<BlogDetail />} />
           <Route path="/guestbook" element={<GuestBook />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );

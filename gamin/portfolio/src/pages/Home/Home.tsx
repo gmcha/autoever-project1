@@ -2,7 +2,6 @@ import About from "../../components/About/About";
 import Contacts from "../../components/Contacts/Contacts";
 import Experience from "../../components/Experience/Experience";
 import FeaturedProjects from "../../components/FeaturedProjects/FeaturedProjects";
-import Footer from "../../components/Footer/Footer";
 import Skills from "../../components/Skills/Skills";
 import TopBlogs from "../../components/TopBlogs/TopBlogs";
 
@@ -14,7 +13,6 @@ function Home() {
       <Experience />
       <FeaturedProjects />
       <TopBlogs />
-      <Footer />
       <Contacts />
     </div>
   );
