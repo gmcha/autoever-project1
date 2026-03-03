@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { BlogGeneralData, FilterType } from "../../types/blog";
 import { supabase } from "../../api/supabase";
 import { Link } from "react-router-dom";
+import styles from "./Blogs.module.css";
 
 function Blogs() {
   const [posts, setPosts] = useState<BlogGeneralData[]>([]);
@@ -39,25 +40,44 @@ function Blogs() {
   };
 
   return (
-    <main>
+    <main className={styles.main}>
       <header>
-        <h1>Study Note</h1>
+        <h1 className={styles.h1}>Study Note</h1>
       </header>
 
-      <nav>
-        <button onClick={() => setFilter("ALL")}>ALL</button>
-        <button onClick={() => setFilter("BLOG")}>POST</button>
-        <button onClick={() => setFilter("TIL")}>TIL</button>
+      <nav className={styles.nav}>
+        <button
+          className={`${styles.button} ${filter === "ALL" ? styles.active : ""}`}
+          onClick={() => setFilter("ALL")}
+        >
+          ALL
+        </button>
+        <button
+          className={`${styles.button} ${filter === "BLOG" ? styles.active : ""}`}
+          onClick={() => setFilter("BLOG")}
+        >
+          POST
+        </button>
+        <button
+          className={`${styles.button} ${filter === "TIL" ? styles.active : ""}`}
+          onClick={() => setFilter("TIL")}
+        >
+          TIL
+        </button>
       </nav>
 
-      <section>
+      <section className={styles.listSection}>
         {filteredPosts.map((post) => (
-          <Link key={post.id} to={`/blogs/${post.slug}`}>
-            <article key={post.id}>
-              <h2>{post.title}</h2>
-              <p>{post.summary}</p>
+          <Link
+            key={post.id}
+            to={`/blogs/${post.slug}`}
+            className={styles.link}
+          >
+            <article className={styles.card}>
+              <h2 className={styles.cardTitle}>{post.title}</h2>
+              <p className={styles.cardSummary}>{post.summary}</p>
 
-              <div>
+              <div className={styles.cardFooter}>
                 <time dateTime={post.created_at}>
                   {formatDate(post.created_at)}
                 </time>
