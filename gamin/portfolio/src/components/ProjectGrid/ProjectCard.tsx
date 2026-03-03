@@ -5,13 +5,9 @@ import styles from "./ProjectCard.module.css";
 
 interface ProjectCardProps {
   project: Project;
-  layout: "vertical" | "horizontal";
 }
 
-function ProjectCard({ project, layout }: ProjectCardProps) {
-  const isVertical = layout === "vertical";
-  const layoutClass = isVertical ? styles.vertical : styles.horizontal;
-
+function ProjectCard({ project }: ProjectCardProps) {
   const formatDate = (dateString: string) => {
     if (!dateString) return "";
     const [year, month] = dateString.split("-");
@@ -44,10 +40,7 @@ function ProjectCard({ project, layout }: ProjectCardProps) {
   };
 
   return (
-    <Link
-      to={`/projects/${project.slug}`}
-      className={`${styles.card} ${layoutClass}`}
-    >
+    <Link to={`/projects/${project.slug}`} className={`${styles.card}`}>
       {/* 썸네일 */}
       <div className={styles.thumbnailWrapper}>
         {project.thumbnail_url ? (

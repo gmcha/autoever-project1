@@ -1,18 +1,10 @@
 .card {
   display: flex;
+  flex-direction: column;
   flex: 1;
   background-color: #f3f4f6;
   border-radius: 12px;
   overflow: hidden; /* 이미지가 둥근 모서리를 뚫고 나가지 않게 자름 */
-}
-
-.vertical {
-  flex-direction: column;
-  width: 100%;
-}
-
-.horizontal {
-  width: 100%;
 }
 
 .thumbnailWrapper {

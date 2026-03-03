@@ -15,11 +15,7 @@ function ProjectGrid({ projects, variant = "list" }: ProjectGridProps) {
       className={`${styles.gridContainer} ${isMain ? styles.main : styles.list}`}
     >
       {projects.map((project) => (
-        <ProjectCard
-          key={project.id}
-          project={project}
-          layout={isMain ? "vertical" : "horizontal"}
-        />
+        <ProjectCard key={project.id} project={project} />
       ))}
     </div>
   );
