@@ -4,12 +4,11 @@ import styles from "./Experience.module.css";
 
 function Experience() {
   return (
-    // h1~h6 태그는 스타일 적용 때 고려할거임
-    <section>
-      <h1>경력사항</h1>
-      <div className="styles.gridContainer">
+    <section className={styles.section}>
+      <div className={styles.title}>경력사항</div>
+      <div className={styles.gridContainer}>
         {/* 왼쪽 단 */}
-        <div className="column">
+        <div className={styles.column}>
           {leftSections.map((section) => (
             // 교육 / 어학 및 자격증
             <HistorySection
@@ -20,7 +19,7 @@ function Experience() {
           ))}
         </div>
         {/* 오른쪽 단 */}
-        <div className="column">
+        <div className={styles.column}>
           {rightSections.map((section) => (
             // 활동
             <HistorySection
