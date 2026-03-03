@@ -41,3 +41,35 @@
   font-size: 2rem;
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  .skills {
+    padding: 24px;
+    gap: 48px;
+  }
+
+  .skills img {
+    width: 60px;
+  }
+
+  .section {
+    gap: 24px;
+  }
+
+  .categoryName {
+    font-size: 1.5rem;
+  }
+
+  .techList {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 16px;
+  }
+
+  .techItem {
+    gap: 8px;
+  }
+
+  .techItem p {
+    font-size: 14px;
+  }
+}

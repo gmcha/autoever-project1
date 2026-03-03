@@ -10,7 +10,7 @@ function About() {
           alt="가민의 프로필 사진"
           className={styles.profileImg}
         />
-        <div className="idText">
+        <div className={styles.idText}>
           <div className={styles.name}>차가민</div>
           <p className={styles.role}>Full-stack Developer</p>
         </div>

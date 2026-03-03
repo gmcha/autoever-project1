@@ -102,3 +102,52 @@
   justify-content: center;
   color: #0046ff;
 }
+
+@media (max-width: 768px) {
+  .section {
+    padding: 64px 20px;
+  }
+
+  .title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .cardsContainer {
+    flex-direction: column;
+    gap: 32px;
+    padding-top: 20px;
+    padding-bottom: 60px;
+  }
+
+  .leftColumn {
+    width: 100%;
+    gap: 32px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 335px;
+    height: auto; /* 내용 길이에 맞춰 카드 높이가 유동적으로 변하게 합니다 */
+    min-height: 200px;
+    padding: 24px;
+    margin: 0 auto;
+
+    /* 모바일에서는 그림자가 너무 크면 화면 밖으로 잘리므로 그림자 크기를 반으로 줄입니다 */
+    box-shadow:
+      -20px 40px 20px rgba(14, 30, 37, 0.1),
+      -2px -1px 2px rgba(14, 30, 37, 0.1);
+  }
+
+  /* 모바일 화면은 좁아서 회전각이 크면 가로 스크롤이 생길 수 있으므로 각도를 살짝 줄여줍니다 */
+  .card1 {
+    transform: rotate(-1.5deg);
+  }
+  .card2 {
+    transform: rotate(1deg);
+  }
+  .card3 {
+    transform: rotate(-1.5deg);
+  }
+}

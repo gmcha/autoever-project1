@@ -22,3 +22,26 @@
   display: flex;
   gap: 24px;
 }
+
+@media (max-width: 768px) {
+  .header {
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .logoWrapper {
+    /* 글자가 세로로 떨어지는 것을 완벽히 차단합니다. */
+    white-space: nowrap;
+    /* 로고 영역이 좁아지지 않게 크기를 유지합니다. */
+    flex-shrink: 0;
+    gap: 12px;
+  }
+
+  .nav {
+    width: 100%;
+    justify-content: center;
+    gap: 16px;
+    font-size: 14px;
+  }
+}

@@ -17,3 +17,14 @@
 .linkTo {
   color: #0046ff;
 }
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .section {
+    padding: 64px 20px 32px 20px;
+    gap: 32px;
+  }
+}
