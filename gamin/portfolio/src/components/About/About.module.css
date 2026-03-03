@@ -14,6 +14,7 @@
   height: 440px;
   object-fit: cover; /* 사진 비율이 깨지지 않고 꽉 차게 잘리도록 설정 */
   border-radius: 50%;
+  margin-left: 24px;
 }
 
 .bio {

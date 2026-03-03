@@ -23,14 +23,16 @@ function Skills() {
           techMap.get(name.toLowerCase()),
         );
         return (
-          <section key={group.category}>
+          <section key={group.category} className={styles.section}>
             <h2>{group.category}</h2>
+
+            <hr />
 
             <div className={styles.techList}>
               {/* techList안에 각 item을 보여준다.  */}
               {techItems.map((item) => {
                 return (
-                  <div key={item.name} className="techItem">
+                  <div key={item.name} className={styles.techItem}>
                     <img
                       key={item.name}
                       src={`https://cdn.simpleicons.org/${item.icon}/${item.color}`}
