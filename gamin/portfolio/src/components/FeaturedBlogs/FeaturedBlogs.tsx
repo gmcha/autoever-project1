@@ -28,7 +28,7 @@ function FeaturedBlogs() {
   }, []);
   return (
     <section className={styles.section}>
-      <h1>Study Note</h1>
+      <div className={styles.title}>Study Note</div>
 
       {/* 데이터가 성공적으로 불러와졌을 때 */}
       {blogs.length > 0 && (

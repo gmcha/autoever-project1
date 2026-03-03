@@ -1,8 +1,23 @@
-.cardsContainer {
+.section {
+  padding: 80px 48px;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.viewAll {
+  display: flex;
+  justify-content: center;
+  color: #0046ff;
+}
+
+/* .cardsContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 50px;
   padding-top: 72px;
   padding-bottom: 120px;
-}
+} */
