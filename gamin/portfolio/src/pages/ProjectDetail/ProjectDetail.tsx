@@ -4,6 +4,7 @@ import type { Project } from "../../types/project";
 import { supabase } from "../../api/supabase";
 import { techMap } from "../../utils/getIcons";
 import ReactMarkdown from "react-markdown";
+import styles from "./ProjectDetail.module.css";
 
 interface ProjectDetailData extends Project {
   project_details: { content: string }[];
@@ -67,7 +68,7 @@ function ProjectDetail() {
       .filter((iconData) => iconData !== undefined);
 
     return (
-      <div className="flex gap-2">
+      <div className={styles.techIconContainer}>
         {resolvedTechIcons.map((item) => (
           <img
             key={item?.name}
@@ -82,35 +83,35 @@ function ProjectDetail() {
   };
 
   return (
-    <article>
-      <h1>{project?.title}</h1>
-      <div>
-        <div>
-          <h3>프로젝트 설명</h3>
+    <article className={styles.article}>
+      <h1 className={styles.h1}>{project?.title}</h1>
+      <div className={styles.fullMeta}>
+        <div className={styles.metaBlock}>
+          <div className={styles.metaTitle}>프로젝트 설명</div>
           <p>{project?.summary}</p>
         </div>
 
-        <div>
-          <h3>기술 스택</h3>
+        <div className={styles.metaBlock}>
+          <div className={styles.metaTitle}>기술 스택</div>
           {renderTechIcons()}
         </div>
 
-        <div>
-          <div>
-            <h3>기간</h3>
+        <div className={styles.dateNIsGroup}>
+          <div className={styles.metaBlock}>
+            <div className={styles.metaTitle}>기간</div>
             <p>
               {project?.start_date ? formatDate(project?.start_date) : ""} ~
               {project?.end_date ? formatDate(project.end_date) : ""}
             </p>
           </div>
-          <div>
-            <h3>프로젝트 형태</h3>
+          <div className={styles.metaBlock}>
+            <div className={styles.metaTitle}>프로젝트 형태</div>
             <p>{project?.is_team ? "팀 프로젝트" : "개인 프로젝트"}</p>
           </div>
         </div>
       </div>
 
-      <div>
+      <div className={styles.deployLink}>
         {deployContent ? (
           <ReactMarkdown>{deployContent}</ReactMarkdown>
         ) : (
@@ -118,7 +119,7 @@ function ProjectDetail() {
         )}
       </div>
 
-      <section>
+      <section className={styles.section}>
         <h2>상세 내용</h2>
         <div>
           {project?.project_details?.[0]?.content || "상세 내용이 없습니다."}
