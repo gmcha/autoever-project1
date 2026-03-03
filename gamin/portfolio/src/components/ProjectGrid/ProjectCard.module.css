@@ -1,5 +1,6 @@
 .card {
   display: flex;
+  flex: 1;
   background-color: #f3f4f6;
   border-radius: 12px;
   overflow: hidden; /* 이미지가 둥근 모서리를 뚫고 나가지 않게 자름 */
