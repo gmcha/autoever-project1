@@ -9,11 +9,13 @@ import BlogDetail from "./pages/BlogDetail/BlogDetail";
 import ProjectDetail from "./pages/ProjectDetail/ProjectDetail";
 import Footer from "./components/Footer/Footer";
 import GuestBook from "./pages/GuestBook/GuestBook";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <div className={styles.app}>
       <BrowserRouter>
+        <ScrollToTop />
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
