@@ -19,13 +19,13 @@ export const leftSections: HistorySection[] = [
     items: [
       {
         date: "2021-2026",
-        title: "한국대학교",
+        title: "경희대학교",
         subtitle: "컴퓨터공학 전공",
         isActive: false,
       },
       {
         date: "2019-2021",
-        title: "현토에버고등학교",
+        title: "청명고등학교",
         isActive: false,
       },
     ],
@@ -53,6 +53,14 @@ export const rightSections: HistorySection[] = [
         subtitle: "웹/앱 개발 과정",
         descriptions: ["실무 중심의 프런트엔드와 백엔드 내용을 배움"],
         isActive: true,
+        iconType: "burst",
+      },
+      {
+        date: "2024 - 2025",
+        title: "UMC 7th",
+        subtitle: "백엔드(Node.js) 파트",
+        descriptions: ["Node.js 중심의 백엔드 내용을 배움"],
+        isActive: false,
         iconType: "burst",
       },
     ],
