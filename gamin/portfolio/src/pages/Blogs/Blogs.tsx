@@ -1,29 +1,50 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { BlogGeneralData, FilterType } from "../../types/blog";
 import { supabase } from "../../api/supabase";
 import { Link } from "react-router-dom";
 import styles from "./Blogs.module.css";
+import { useQuery } from "@tanstack/react-query";
 
 function Blogs() {
-  const [posts, setPosts] = useState<BlogGeneralData[]>([]);
+  // const [posts, setPosts] = useState<BlogGeneralData[]>([]);
   const [filter, setFilter] = useState<FilterType>("ALL");
 
-  useEffect(() => {
-    const fetchPosts = async () => {
+  const {
+    data: posts = [],
+    isLoading,
+    error,
+  } = useQuery<BlogGeneralData[]>({
+    queryKey: ["posts"],
+    queryFn: async () => {
       const { data, error } = await supabase
         .from("posts")
         .select("*")
         .order("created_at", { ascending: false });
 
-      if (error) {
-        console.error("Error fetching posts:", error);
-      } else if (data) {
-        setPosts(data);
-      }
-    };
+      if (error) throw error;
+      return data;
+    },
+  });
 
-    fetchPosts();
-  }, []);
+  if (isLoading) return <p>로딩 중...</p>;
+  if (error) return <p>에러가 발생했습니다.</p>;
+
+  // useEffect(() => {
+  //   const fetchPosts = async () => {
+  //     const { data, error } = await supabase
+  //       .from("posts")
+  //       .select("*")
+  //       .order("created_at", { ascending: false });
+
+  //     if (error) {
+  //       console.error("Error fetching posts:", error);
+  //     } else if (data) {
+  //       setPosts(data);
+  //     }
+  //   };
+
+  //   fetchPosts();
+  // }, []);
 
   const filteredPosts = posts.filter((post) => {
     if (filter === "ALL") return true;

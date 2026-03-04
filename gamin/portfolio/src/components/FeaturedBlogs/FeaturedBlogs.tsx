@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../../api/supabase";
 import styles from "./FeaturedBlogs.module.css";
 import type { Blog } from "../../types/blog";
+import { useQuery } from "@tanstack/react-query";
 
 function FeaturedBlogs() {
-  const [blogs, setBlogs] = useState<Blog[]>([]);
-
-  useEffect(() => {
-    const fetchFeaturedBlogs = async () => {
+  const {
+    data: blogs = [],
+    isLoading,
+    error,
+  } = useQuery<Blog[]>({
+    queryKey: ["featuredBlogs"],
+    queryFn: async () => {
       const { data, error } = await supabase
         .from("posts")
         .select("id, title, summary, slug")
@@ -16,16 +19,35 @@ function FeaturedBlogs() {
         .order("created_at", { ascending: false })
         .limit(3);
 
-      if (error) {
-        console.error("Error fetching posts:", error);
-        return;
-      }
+      if (error) throw error;
+      return data;
+    },
+  });
 
-      setBlogs(data);
-    };
+  if (isLoading) return <p>로딩 중...</p>;
+  if (error) return <p>에러가 발생했습니다.</p>;
 
-    fetchFeaturedBlogs();
-  }, []);
+  // const [blogs, setBlogs] = useState<Blog[]>([]);
+
+  // useEffect(() => {
+  //   const fetchFeaturedBlogs = async () => {
+  //     const { data, error } = await supabase
+  //       .from("posts")
+  //       .select("id, title, summary, slug")
+  //       .eq("type", "BLOG")
+  //       .order("created_at", { ascending: false })
+  //       .limit(3);
+
+  //     if (error) {
+  //       console.error("Error fetching posts:", error);
+  //       return;
+  //     }
+
+  //     setBlogs(data);
+  //   };
+
+  //   fetchFeaturedBlogs();
+  // }, []);
 
   return (
     <section className={styles.section}>

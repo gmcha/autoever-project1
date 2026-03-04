@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { Project } from "../../types/project";
 import { supabase } from "../../api/supabase";
 import { techMap } from "../../utils/getIcons";
 import ReactMarkdown from "react-markdown";
 import styles from "./ProjectDetail.module.css";
+import { useQuery } from "@tanstack/react-query";
 
 interface ProjectDetailData extends Project {
   project_details: { content: string }[];
@@ -12,12 +12,17 @@ interface ProjectDetailData extends Project {
 
 function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const [project, setProject] = useState<ProjectDetailData | null>(null);
-  const [deployContent, setDeployContent] = useState<string>("");
+  // const [project, setProject] = useState<ProjectDetailData | null>(null);
+  // const [deployContent, setDeployContent] = useState<string>("");
 
-  useEffect(() => {
-    const fetchProjectDetail = async () => {
-      if (!slug) return;
+  const {
+    data: project,
+    isLoading: isProjectLoading,
+    error: projectError,
+  } = useQuery<ProjectDetailData | null>({
+    queryKey: ["project", slug], // slug별로 독립적인 캐시 생성
+    queryFn: async () => {
+      if (!slug) return null;
 
       const { data, error } = await supabase
         .from("projects")
@@ -25,34 +30,71 @@ function ProjectDetail() {
         .eq("slug", slug)
         .single();
 
-      if (error) {
-        console.log("Error fetching project details:", error);
-      } else {
-        setProject(data as ProjectDetailData);
-      }
-    };
+      if (error) throw error;
+      return data as ProjectDetailData;
+    },
+    enabled: !!slug, // slug가 있을 때만 쿼리 실행
+  });
 
-    fetchProjectDetail();
-  }, [slug]);
+  const { data: deployContent = "", isLoading: isDeployLoading } =
+    useQuery<string>({
+      queryKey: ["projectDeployLink", slug],
+      queryFn: async () => {
+        if (!slug) return "";
 
-  useEffect(() => {
-    if (!slug) return;
-
-    fetch(`/project-link/${slug}.md`)
-      .then(async (res) => {
+        const res = await fetch(`/project-link/${slug}.md`);
         if (!res.ok) return "";
 
         const text = await res.text();
-
-        // SPA 환경에서 파일이 없을 때 반환되는 index.html 코드를 걸러냅니다. (AI 코드)
         if (text.trim().toLowerCase().startsWith("<!doctype html>")) {
           return "";
         }
-
         return text;
-      })
-      .then((text) => setDeployContent(text));
-  }, [slug]);
+      },
+      enabled: !!slug,
+    });
+
+  if (isProjectLoading) return <p>프로젝트 정보를 불러오는 중...</p>;
+  if (projectError) return <p>프로젝트 정보를 불러오는 데 실패했습니다.</p>;
+
+  // useEffect(() => {
+  //   const fetchProjectDetail = async () => {
+  //     if (!slug) return;
+
+  //     const { data, error } = await supabase
+  //       .from("projects")
+  //       .select(`*, tech_stacks (*), project_details (content)`)
+  //       .eq("slug", slug)
+  //       .single();
+
+  //     if (error) {
+  //       console.log("Error fetching project details:", error);
+  //     } else {
+  //       setProject(data as ProjectDetailData);
+  //     }
+  //   };
+
+  //   fetchProjectDetail();
+  // }, [slug]);
+
+  // useEffect(() => {
+  //   if (!slug) return;
+
+  //   fetch(`/project-link/${slug}.md`)
+  //     .then(async (res) => {
+  //       if (!res.ok) return "";
+
+  //       const text = await res.text();
+
+  //       // SPA 환경에서 파일이 없을 때 반환되는 index.html 코드를 걸러냅니다. (AI 코드)
+  //       if (text.trim().toLowerCase().startsWith("<!doctype html>")) {
+  //         return "";
+  //       }
+
+  //       return text;
+  //     })
+  //     .then((text) => setDeployContent(text));
+  // }, [slug]);
 
   const formatDate = (dateString: string) => {
     if (!dateString) return "";
@@ -112,7 +154,7 @@ function ProjectDetail() {
       </div>
 
       <div className={styles.deployLink}>
-        {deployContent ? (
+        {isDeployLoading ? (
           <ReactMarkdown>{deployContent}</ReactMarkdown>
         ) : (
           <span>배포 링크가 없습니다.</span>

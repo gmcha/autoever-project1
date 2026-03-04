@@ -1,31 +1,52 @@
 import { Link } from "react-router-dom";
 import ProjectGrid from "../ProjectGrid/ProjectGrid";
-import { useEffect, useState } from "react";
 import type { Project } from "../../types/project";
 import { supabase } from "../../api/supabase";
 import styles from "./FeaturedProjects.module.css";
+import { useQuery } from "@tanstack/react-query";
 
 function FeaturedProjects() {
-  const [projects, setProjects] = useState<Project[]>([]);
-
-  useEffect(() => {
-    const fetchFeaturedProjects = async () => {
+  const {
+    data: projects = [],
+    isLoading,
+    error,
+  } = useQuery<Project[]>({
+    queryKey: ["featuredProjects"],
+    queryFn: async () => {
       const { data, error } = await supabase
         .from("projects")
         .select(`*, tech_stacks (*)`)
         .order("start_date", { ascending: false })
         .limit(3);
 
-      if (error) {
-        console.error("Error fetching projects:", error);
-        return;
-      }
+      if (error) throw error;
+      return data;
+    },
+  });
 
-      setProjects(data);
-    };
+  if (isLoading) return <p>로딩 중...</p>;
+  if (error) return <p>에러가 발생했습니다.</p>;
 
-    fetchFeaturedProjects();
-  }, []);
+  // const [projects, setProjects] = useState<Project[]>([]);
+
+  // useEffect(() => {
+  //   const fetchFeaturedProjects = async () => {
+  //     const { data, error } = await supabase
+  //       .from("projects")
+  //       .select(`*, tech_stacks (*)`)
+  //       .order("start_date", { ascending: false })
+  //       .limit(3);
+
+  //     if (error) {
+  //       console.error("Error fetching projects:", error);
+  //       return;
+  //     }
+
+  //     setProjects(data);
+  //   };
+
+  //   fetchFeaturedProjects();
+  // }, []);
 
   return (
     <section className={styles.section}>
